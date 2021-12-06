@@ -1,10 +1,6 @@
 class V1::GreetingsController<ApplicationController
   def index
-    render json:{:greetings=>[
-      {
-        :id => 'text id',
-        :text => 'some-thing'
-      }
-    ]}.to_json    
+    @messages = Message.find(rand(1..Message.all.size))
+    render json:@messages    
   end
 end
