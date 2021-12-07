@@ -1,7 +1,5 @@
 import React, {useEffect}from "react"
-import PropTypes from "prop-types"
-import { connect } from 'react-redux';
-import {createStructuredSelector} from 'reselect';
+// import PropTypes from "prop-types"
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getGreeting } from "../reducers/greetingReducer";
@@ -29,15 +27,5 @@ const Greeting = () => {
       </React.Fragment>
     );
   }
-
-// const structuredSelector = createStructuredSelector({
-//   messages:state=>state.message
-// })
-
-// const mapDispatchToProps = { getGreeting };
-// Greeting.propTypes = {
-//   greeting: PropTypes.string
-// };
-// export default connect(structuredSelector, mapDispatchToProps)(Greeting)
 
 export default Greeting
