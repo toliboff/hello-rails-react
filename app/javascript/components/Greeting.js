@@ -1,16 +1,43 @@
-import React from "react"
+import React, {useEffect}from "react"
 import PropTypes from "prop-types"
-class Greeting extends React.Component {
-  render () {
+import { connect } from 'react-redux';
+import {createStructuredSelector} from 'reselect';
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getGreeting } from "../reducers/greetingReducer";
+
+const Greeting = () => {
+  const message = useSelector((state) => state.message);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (!message) {
+      dispatch(getGreeting());
+    }
+  }, []);
+
+  const getAnotherGreeting =() => {
+    dispatch(getGreeting());
+  }
+
     return (
       <React.Fragment>
-        Greeting: {this.props.greeting}
+        <div className='header'>
+          <h1>Greeting of the day</h1>
+          <button onClick={()=>getAnotherGreeting()} className='btn'>Get another greeting</button>
+        </div>
+        <p> { message && message.text }</p>
       </React.Fragment>
     );
   }
-}
 
-Greeting.propTypes = {
-  greeting: PropTypes.string
-};
+// const structuredSelector = createStructuredSelector({
+//   messages:state=>state.message
+// })
+
+// const mapDispatchToProps = { getGreeting };
+// Greeting.propTypes = {
+//   greeting: PropTypes.string
+// };
+// export default connect(structuredSelector, mapDispatchToProps)(Greeting)
+
 export default Greeting
